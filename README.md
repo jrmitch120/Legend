@@ -12,7 +12,7 @@ jquery to drive the interface, but not much.  Hey, it's just text!
 Theme & Direction
 -----------------
 
-Every player takes the role of a fledgly magician that is trying to increase 
+Every player takes the role of a fledgling magician that is trying to increase 
 in knowledge and power in order to confront an evil wizard that has taken over 
 the town.
 
@@ -27,7 +27,7 @@ the engine is being built.
 Contributing
 ------------
 
-If you're interested in helping out, I'm always interested in pull requests ;)
+If you're interested in helping out, I'll always entertain pull requests ;)
 
 Try to stick to the coding style as closly as possible.
 
@@ -38,6 +38,13 @@ Areas or interest:
 * New ideas
 * Thread safety!
 * Code refacting
+
+Demo
+----
+
+I've got a demo running over on AppHarbor:
+
+http://legend.apphb.com/Client.aspx
 
 Contact
 -------
