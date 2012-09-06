@@ -1,0 +1,56 @@
+body {
+    background-color: #000;
+	font: 16px "Courrier New", Courier, monospace bold;
+	font-weight: bold;
+    /*font-family: 'Lucida Console';*/
+    /*color: #808080;*/
+	/*color: #4cff00;*/
+	color: #ddd;
+	overflow: hidden;
+}
+div.textItem {
+	padding: 0;
+}
+div.verticalSpace {
+	padding: 100px 0 0 0;
+}
+#bottom {
+	height: 20px;
+}
+#cmd {
+	background-color:#000;
+	border: 0;
+	color: #ddd;
+	font: 16px "Courrier New", Courier, monospace bold;
+	outline-width: 0;
+	width:100%;
+}
+#cmdContainer {
+	width:100%
+}
+#inputContainer {
+	border-spacing:0;
+	border-collapse:collapse;
+	width: 100%;
+}
+#inputContainer td {
+	 padding: 0;
+ }
+#main {
+	min-width: 600px;
+}
+#prompt {
+	white-space: nowrap;
+}
+.Attack {
+	color: #f00;
+}
+.Important {
+	color: #fff;
+}
+.Notification {
+	color: #b200ff;
+}
+.Title {
+	color: #0ff;
+}
