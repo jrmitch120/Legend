@@ -141,6 +141,7 @@ namespace Legend.World
             player.ClientIds.Remove(clientId);
             if (player.ClientIds.Count == 0)
             {
+                player.Online = false;
                 GetRoom(player.RoomReference).PlayerReferences.Remove(player);
                 _service.Save(player);
 
