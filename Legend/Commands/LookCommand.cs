@@ -36,40 +36,26 @@ namespace Legend.Commands
             {
                 var lookFor = String.Join(" ", args).Trim();
 
+                var otherPlayer = players.FindByName(lookFor);
+                var playerItem = callingPlayer.Items.FindByName(lookFor);
+                var roomItem = room.Items.FindByName(lookFor);
+
                 if (callingPlayer.Name.StartsWith(lookFor, StringComparison.OrdinalIgnoreCase)) // This player
                     context.NotificationService.ToPlayer(callingPlayer, new PlayerMessages(callingPlayer.Description));
-                else if (players.Count(x => x.Name.StartsWith(lookFor, StringComparison.OrdinalIgnoreCase)) > 0) // Other player
+                else if (otherPlayer != null) // Other player
                 {
-                    var target = players.First(x => x.Name.StartsWith(lookFor, StringComparison.OrdinalIgnoreCase));
+                    context.NotificationService.ToPlayer(callingPlayer, new PlayerMessages(otherPlayer.Description));
 
-                    context.NotificationService.ToPlayer(callingPlayer, new PlayerMessages(target.Description));
+                    context.NotificationService.ToPlayer(otherPlayer, new PlayerMessages(String.Format("{0} is looking you over.", callingPlayer.Name)));
 
-                    context.NotificationService.ToPlayer(target, new PlayerMessages(String.Format("{0} is looking you over.", callingPlayer.Name)));
-
-                    context.NotificationService.ToPlayers(players.Where(x => x.Name != target.Name),
+                    context.NotificationService.ToPlayers(players.Where(x => x.Name != otherPlayer.Name),
                                                           new PlayerMessages(String.Format("{0} is taking a good look at {1}.",
-                                                                                           callingPlayer.Name,target.Name)));
+                                                                                           callingPlayer.Name, otherPlayer.Name)));
                 }
-                else if (callingPlayer.Items.Count(x => x.Name.StartsWith(lookFor, StringComparison.OrdinalIgnoreCase)) > 0) // Item in inventory
-                {
-                    context.NotificationService.ToPlayer(callingPlayer, new PlayerMessages(
-                                                                            callingPlayer.Items.First(
-                                                                                x =>
-                                                                                x.Name.StartsWith(lookFor,
-                                                                                                  StringComparison.
-                                                                                                      OrdinalIgnoreCase))
-                                                                                .Description));
-                }
-                else if (room.Items.Count(x => x.Name.StartsWith(lookFor, StringComparison.OrdinalIgnoreCase)) > 0) // Item in room
-                {
-                    context.NotificationService.ToPlayer(callingPlayer, new PlayerMessages(
-                                                                            room.Items.First(
-                                                                                x =>
-                                                                                x.Name.StartsWith(lookFor,
-                                                                                                  StringComparison.
-                                                                                                      OrdinalIgnoreCase))
-                                                                                .Description));
-                }
+                else if (playerItem != null) // Item in inventory
+                    context.NotificationService.ToPlayer(callingPlayer, new PlayerMessages(playerItem.Description));
+                else if (roomItem != null) // Item in room
+                    context.NotificationService.ToPlayer(callingPlayer, new PlayerMessages(roomItem.Description));
                 else
                 {
                     context.NotificationService.ToPlayer(callingPlayer,

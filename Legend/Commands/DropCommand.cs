@@ -15,7 +15,7 @@ namespace Legend.Commands
 
             var room = context.World.GetRoom(callingPlayer.RoomReference);
             var players = context.World.GetOnlinePlayers(room).Where(player => player.Name != callingPlayer.Name).ToList();
-            var item = callingPlayer.Items.FirstOrDefault(x => x.Name.StartsWith(String.Join(" ", args).Trim(),StringComparison.OrdinalIgnoreCase));
+            var item = callingPlayer.Items.FindByName(String.Join(" ", args).Trim());
             
             if(item != null)
             {

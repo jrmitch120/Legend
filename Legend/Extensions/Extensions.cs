@@ -45,12 +45,25 @@ namespace Legend.Extensions
         }
     }
 
+    public static class GameObjectExtensions
+    {
+        public static T FindByName<T>(this IEnumerable<T> gameObjs, string targetName) where T : class, IGameObject 
+        {
+            var enumerable = gameObjs as List<T> ?? gameObjs.ToList();
+            var gameObject = enumerable.FirstOrDefault(x => x.Name.StartsWith(targetName, StringComparison.OrdinalIgnoreCase)) ??
+                             enumerable.FirstOrDefault(x => x.Name.IndexOf(" " + targetName, StringComparison.OrdinalIgnoreCase) > 0);
+
+            return (gameObject);
+        }
+    }
+
     public static class PlayerExtensions
     {
-        public static Player FindByName(this IEnumerable<Player> players, string targetName)
-        {
-            return (players.FirstOrDefault(x => x.Name.StartsWith(targetName, StringComparison.OrdinalIgnoreCase)));
-        }
+        // Should be covered by the IGameObject extension now.
+        //public static Player FindByName(this IEnumerable<Player> players, string targetName)
+        //{
+        //    return (players.FirstOrDefault(x => x.Name.StartsWith(targetName, StringComparison.OrdinalIgnoreCase)));
+        //}
 
         public static IEnumerable<Player> ExcludePlayer(this IEnumerable<Player> players, Player excludePlayer)
         {
